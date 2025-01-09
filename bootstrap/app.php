@@ -17,6 +17,10 @@ return Application::configure(basePath: dirname(__DIR__))
         }
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->prepend([
+            
+        ]);
+
         $middleware->alias([
             'admin' => App\Http\Middleware\Backend\Auth\AdminMiddleware::class
         ]);

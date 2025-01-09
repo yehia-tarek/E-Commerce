@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -17,4 +19,20 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
+
+Route::fallback(function () {
+    if (Auth::guard('admin')->check()) {
+        return redirect()->route('admin.dashboard');
+    }
+
+    if (str_contains(URL::current(), 'admin')) {
+        return redirect()->route('admin.login');
+    }
+
+    if (Auth::guard('web')->check()) {
+        return redirect()->route('dashboard');
+    }
+
+    return redirect()->route('login');
+});

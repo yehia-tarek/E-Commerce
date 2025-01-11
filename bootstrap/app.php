@@ -12,17 +12,21 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
         then: function () {
             Route::prefix('admin')
-                ->middleware('web')
+                ->middleware(['web', 'use_admin_guard'])
                 ->group(__DIR__ . '/../routes/admin.php');
         }
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->prepend([
-            
+
         ]);
 
         $middleware->alias([
-            'admin' => App\Http\Middleware\Backend\Auth\AdminMiddleware::class
+            'admin' => App\Http\Middleware\Backend\Auth\AdminMiddleware::class,
+            'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
+            'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
+            'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
+            'use_admin_guard' => \App\Http\Middleware\Backend\Auth\UseAdminGuard::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

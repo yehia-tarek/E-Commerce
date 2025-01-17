@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Backend\Auth\AdminsController;
 use App\Http\Controllers\Backend\Auth\AdminAuthController;
 
 
@@ -16,5 +16,7 @@ Route::middleware('admin')->group(function () {
     })->name('admin.dashboard');
 
     Route::post('logout', [AdminAuthController::class, 'destroy'])->name('admin.logout');
+
+    Route::resource('admins', AdminsController::class);
 });
 

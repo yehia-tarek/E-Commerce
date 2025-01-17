@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Auth;
+namespace App\Http\Controllers\Backend;
 
 use Exception;
-use App\Models\Admin;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Services\Admin\IAdminService;

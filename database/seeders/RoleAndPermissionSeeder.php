@@ -34,25 +34,29 @@ class RoleAndPermissionSeeder extends Seeder
     public function createPermissions()
     {
         $permissions = [
-            'role-list',
-            'role-create',
-            'role-edit',
-            'role-delete',
-            'permission-list',
-            'permission-create',
-            'permission-edit',
-            'permission-delete',
-            'admin-list',
-            'admin-create',
-            'admin-edit',
-            'admin-delete',
-            'user-list',
-            'user-create',
-            'user-edit',
-            'user-delete',
+            'role' => [
+                'role-list',
+                'role-create',
+                'role-edit',
+                'role-delete',
+            ],
+            'admin' => [
+                'admin-list',
+                'admin-create',
+                'admin-edit',
+                'admin-delete',
+            ],
+            'user' => [
+                'user-list',
+                'user-create',
+                'user-edit',
+                'user-delete',
+            ],
         ];
-        foreach ($permissions as $permission) {
-            Permission::create(['guard_name' => 'admin', 'name' => $permission]);
+        foreach ($permissions as $group => $groupPermissions) {
+            foreach ($groupPermissions as $permission) {
+                Permission::create(['guard_name' => 'admin', 'name' => $permission, 'group_name' => $group]);
+            }
         }
     }
 

@@ -3,6 +3,9 @@
         <div class="sb-sidenav-menu">
             <div class="nav">
                 @foreach (config('admin.menu') as $menu)
+                    @if ($menu['permission'] && !auth('admin')->user()->can($menu['permission']))
+                        @continue
+                    @endif
                     <a class="nav-link" href="{{ route($menu['route']) }}">
                         <div class="sb-nav-link-icon"><i class="fas {{ $menu['icon'] }}"></i></div>
                         {{ __($menu['name']) }}

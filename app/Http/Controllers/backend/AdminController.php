@@ -11,7 +11,7 @@ use Illuminate\Routing\Controllers\HasMiddleware;
 use App\Http\Requests\Backend\Admins\AdminStoreRequest;
 use App\Http\Requests\Backend\Admins\AdminUpdateRequest;
 
-class AdminsController  extends Controller implements HasMiddleware
+class AdminController  extends Controller implements HasMiddleware
 {
     public function __construct(protected IAdminService $adminService) {}
 

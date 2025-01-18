@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 
-@section('title', __('Admins'))
+@section('title', __('Roles'))
 
 @push('styles')
 @endpush
@@ -30,14 +30,14 @@
                 @endif
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h3 class="card-title mb-0">{{ __('Admins List') }}</h3>
+                        <h3 class="card-title mb-0">{{ __('Roles List') }}</h3>
+                        @can('role-create')
                         <div class="card-tools">
-                            @can('admin-create')
-                                <a href="{{ route('admins.create') }}" class="btn btn-primary btn-sm">
-                                    <i class="fas fa-plus"></i> {{ __('Add New') }}
+                            <a href="{{ route('roles.create') }}" class="btn btn-primary btn-sm">
+                                <i class="fas fa-plus"></i> {{ __('Add New') }}
                                 </a>
-                            @endcan
-                        </div>
+                            </div>
+                        @endcan
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -46,34 +46,30 @@
                                     <tr>
                                         <th>#</th>
                                         <th>{{ __('Name') }}</th>
-                                        <th>{{ __('Email') }}</th>
-                                        <th>{{ __('Role') }}</th>
                                         <th>{{ __('Actions') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse($admins as $admin)
+                                    @forelse($roles->where('name', '!=', 'Super Admin') as $role)
                                         <tr>
-                                            <td>{{ ($admins->currentPage() - 1) * $admins->perPage() + $loop->iteration }}
+                                            <td>{{ ($roles->currentPage() - 1) * $roles->perPage() + $loop->iteration }}
                                             </td>
-                                            <td>{{ $admin->name }}</td>
-                                            <td>{{ $admin->email }}</td>
-                                            <td>{{ $admin->roles->pluck('name')->implode(', ') }}</td>
+                                            <td>{{ $role->name }}</td>
                                             <td>
-                                                @can('admin-edit')
-                                                    <a href="{{ route('admins.edit', $admin->id) }}"
+                                                @can('role-edit')
+                                                    <a href="{{ route('roles.edit', $role->name) }}"
                                                         class="btn btn-sm btn-warning">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                 @endcan
-                                                @can('admin-delete')
-                                                    <form action="{{ route('admins.destroy', $admin->id) }}" method="POST"
-                                                        class="d-inline">
+                                                @can('role-delete')
+                                                    <form action="{{ route('roles.destroy', $role->name) }}"
+                                                        method="POST" class="d-inline">
                                                         @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-danger"
-                                                            onclick="return confirm('Are you sure?')">
-                                                            <i class="fas fa-trash"></i>
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-danger"
+                                                        onclick="return confirm('Are you sure?')">
+                                                        <i class="fas fa-trash"></i>
                                                         </button>
                                                     </form>
                                                 @endcan
@@ -88,9 +84,9 @@
                             </table>
                         </div>
                     </div>
-                    @if ($admins->hasPages())
+                    @if ($roles->hasPages())
                         <div class="card-footer">
-                            {{ $admins->links('pagination::bootstrap-5') }}
+                            {{ $roles->links('pagination::bootstrap-5') }}
                         </div>
                     @endif
                 </div>

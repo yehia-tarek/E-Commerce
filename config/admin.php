@@ -6,21 +6,19 @@ return [
             'name' => 'Dashboard',
             'route' => 'admin.dashboard',
             'icon' => 'fas fa-home',
+            'permission' => null,
         ],
         [
             'name' => 'Admins',
             'route' => 'admins.index',
             'icon' => 'fas fa-users',
+            'permission' => 'admin-list',
         ],
         [
             'name' => 'Roles',
-            'route' => 'admins.index',
+            'route' => 'roles.index',
             'icon' => 'fas fa-user-tag',
-        ],
-        [
-            'name' => 'Permissions',
-            'route' => 'admins.index',
-            'icon' => 'fas fa-lock',
+            'permission' => 'role-list',
         ],
     ],
 ];

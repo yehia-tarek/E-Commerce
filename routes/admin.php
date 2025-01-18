@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Backend\AdminsController;
+use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\Auth\AdminAuthController;
-
+use App\Http\Controllers\Backend\RoleController;
 
 Route::middleware('guest:admin')->group(function () {
     Route::get('login', [AdminAuthController::class, 'create']);
@@ -17,6 +17,6 @@ Route::middleware('admin')->group(function () {
 
     Route::post('logout', [AdminAuthController::class, 'destroy'])->name('admin.logout');
 
-    Route::resource('admins', AdminsController::class);
+    Route::resource('admins', AdminController::class);
+    Route::resource('roles', RoleController::class);
 });
-

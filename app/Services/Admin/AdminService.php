@@ -7,9 +7,7 @@ use App\Repositories\Admin\IAdminRepository;
 
 class AdminService implements IAdminService
 {
-    public function __construct(private IAdminRepository $adminRepository)
-    {
-    }
+    public function __construct(private IAdminRepository $adminRepository) {}
 
     public function all(array $columns = ['*'], array $relations = [])
     {

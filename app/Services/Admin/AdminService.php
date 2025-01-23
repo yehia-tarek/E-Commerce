@@ -33,4 +33,9 @@ class AdminService implements IAdminService
     {
         return $this->adminRepository->delete($id);
     }
+
+    public function updatePassword(int $id, array $data)
+    {
+        return $this->adminRepository->updatePassword($id, $data);
+    }
 }

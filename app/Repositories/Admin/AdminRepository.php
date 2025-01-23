@@ -58,4 +58,14 @@ class AdminRepository implements IAdminRepository
     {
         return Admin::where('id', $id)->delete();
     }
+
+    public function updatePassword(int $id, array $data)
+    {
+        $admin = $this->getById($id);
+        $admin->update([
+            'password' => bcrypt($data['new_password'])
+        ]);
+
+        return $admin;
+    }
 }

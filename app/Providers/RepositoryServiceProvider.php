@@ -7,6 +7,8 @@ use App\Repositories\Admin\AdminRepository;
 use App\Repositories\Admin\IAdminRepository;
 use App\Repositories\Role\RoleRepository;
 use App\Repositories\Role\IRoleRepository;
+use App\Repositories\User\UserRepository;
+use App\Repositories\User\IUserRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -25,5 +27,6 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         $this->app->bind(IAdminRepository::class, AdminRepository::class);
         $this->app->bind(IRoleRepository::class, RoleRepository::class);
+        $this->app->bind(IUserRepository::class, UserRepository::class);
     }
 }

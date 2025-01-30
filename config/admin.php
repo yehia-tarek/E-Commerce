@@ -20,5 +20,11 @@ return [
             'icon' => 'fas fa-user-tag',
             'permission' => 'role-list',
         ],
+        [
+            'name' => 'Customers',
+            'route' => 'customers.index',
+            'icon' => 'fas fa-users',
+            'permission' => 'customer-list',
+        ],
     ],
 ];

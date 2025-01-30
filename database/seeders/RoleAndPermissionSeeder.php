@@ -22,6 +22,7 @@ class RoleAndPermissionSeeder extends Seeder
 
     public function truncateTables()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         $tables = [
             'permissions',
             'roles',
@@ -29,6 +30,7 @@ class RoleAndPermissionSeeder extends Seeder
         foreach ($tables as $table) {
             DB::table($table)->truncate();
         }
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 
     public function createPermissions()

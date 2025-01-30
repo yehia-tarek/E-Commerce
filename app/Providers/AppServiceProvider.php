@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use Yajra\DataTables\Html\Builder;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,5 +24,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::before(function ($user, $ability) {
             return $user->hasRole('Super Admin') ? true : null;
         });
+
+        Builder::useVite();
     }
 }

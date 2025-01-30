@@ -10,6 +10,7 @@
     <title>@yield('title')</title>
     <link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/sass/app.scss'])
     @stack('styles')
 </head>
 

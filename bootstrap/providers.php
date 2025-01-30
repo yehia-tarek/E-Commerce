@@ -5,4 +5,5 @@ return [
     App\Providers\RepositoryServiceProvider::class,
     App\Providers\ServiceServiceProvider::class,
     Spatie\Permission\PermissionServiceProvider::class,
+    Yajra\DataTables\DataTablesServiceProvider::class,
 ];

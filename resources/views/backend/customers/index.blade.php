@@ -10,12 +10,20 @@
         <div class="card">
             <div class="card-header">Manage Customers</div>
             <div class="card-body">
-                {{ $dataTable->table(['class' => 'table table-bordered table-striped table-hover']) }}
+                <x-backend.ajax-data-table :headers="['#', 'Name', 'Email', 'Birth Date', 'Gender',  'Created At', 'Actions']" id="usersTable" :ajax="route('customers.index')"
+                    :createRoute="route('customers.create')" :order="[[3, 'desc']]" :columns="[
+                        ['data' => 'DT_RowIndex', 'name' => 'id'],
+                        ['data' => 'name', 'name' => 'name'],
+                        ['data' => 'email', 'name' => 'email'],
+                        ['data' => 'birth_date', 'name' => 'birth_date'],
+                        ['data' => 'gender', 'name' => 'gender'],
+                        ['data' => 'created_at', 'name' => 'created_at'],
+                        ['data' => 'actions', 'name' => 'actions', 'orderable' => false, 'searchable' => false],
+                    ]" />
             </div>
         </div>
     </div>
 @endsection
 
 @push('scripts')
-    {{ $dataTable->scripts() }}
 @endpush

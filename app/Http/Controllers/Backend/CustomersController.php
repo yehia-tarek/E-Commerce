@@ -4,19 +4,21 @@ namespace App\Http\Controllers\Backend;
 
 use Exception;
 use App\Models\User;
-use Illuminate\Http\Request;
-use App\DataTables\UsersDataTable;
 use App\Services\User\IUserService;
 use App\Http\Controllers\Controller;
+use App\Services\DataTables\UsersDataTable;
 use App\Http\Requests\Backend\User\CustomerStoreRequest;
 use App\Http\Requests\Backend\User\CustomerUpdateRequest;
 
 class CustomersController extends Controller
 {
     public function __construct(private IUserService $userService) {}
-    public function index(UsersDataTable $dataTable)
+    public function index()
     {
-        return $dataTable->render('backend.customers.index');
+        if (!request()->ajax()) {
+            return view('backend.customers.index');
+        }
+        return (new UsersDataTable())->build();
     }
 
     public function create()

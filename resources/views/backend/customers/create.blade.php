@@ -13,55 +13,99 @@
                     {{ session('success') }}
                 </div>
             @endif
-            @if (session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-            @endif
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul class="mb-0">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-            <div class="card-header">Create Customer</div>
+            <div class="card-header">{{ __('Create Customer') }}</div>
             <div class="card-body">
-                <form action="{{ route('customers.store') }}" method="POST" class="row">
+                <x-backend.form.base-form action="{{ route('customers.store') }}" method="POST">
                     @csrf
-                    <div class="form-group col-md-6">
-                        <label for="name">Name</label>
-                        <input type="text" name="name" id="name" class="form-control" required>
+
+                    <div class="row">
+                        <!-- Basic Information Card -->
+                        <div class="col-12 mb-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">{{ __('Basic Information') }}</h5>
+                                </div>
+                                <div class="card-body row">
+                                    <div class="col-md-6">
+                                        <x-backend.form.input
+                                            name="name"
+                                            label="{{ __('Name') }}"
+                                            required
+                                            placeholder="{{ __('Enter customer name') }}"
+                                        />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <x-backend.form.input
+                                            type="email"
+                                            name="email"
+                                            label="{{ __('Email') }}"
+                                            required
+                                            placeholder="{{ __('Enter customer email') }}"
+                                        />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <x-backend.form.input
+                                            type="date"
+                                            name="birth_date"
+                                            label="{{ __('Birth Date') }}"
+                                            required
+                                        />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <x-backend.form.select
+                                            name="gender"
+                                            label="{{ __('Gender') }}"
+                                            required
+                                            :options="[
+                                                'male' => __('Male'),
+                                                'female' => __('Female')
+                                            ]"
+                                            placeholder="{{ __('Select gender') }}"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Password Card -->
+                        <div class="col-12 mb-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">{{ __('Security') }}</h5>
+                                </div>
+                                <div class="card-body row">
+                                    <div class="col-md-6">
+                                        <x-backend.form.input
+                                            type="password"
+                                            name="password"
+                                            label="{{ __('Password') }}"
+                                            required
+                                            placeholder="{{ __('Enter password') }}"
+                                        />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <x-backend.form.input
+                                            type="password"
+                                            name="password_confirmation"
+                                            label="{{ __('Password Confirmation') }}"
+                                            required
+                                            placeholder="{{ __('Confirm password') }}"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">{{ __('Create Customer') }}</button>
+                        </div>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="email">Email</label>
-                        <input type="email" name="email" id="email" class="form-control" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="password">Password</label>
-                        <input type="password" name="password" id="password" class="form-control" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="password_confirmation">Password Confirmation</label>
-                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="birth_date">Birth Date</label>
-                        <input type="date" name="birth_date" id="birth_date" class="form-control" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="gender">Gender</label>
-                        <select name="gender" id="gender" class="form-control" required>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-12 mt-3">
-                        <button type="submit" class="btn btn-primary">Create</button>
-                    </div>
-                </form>
+                </x-backend.form.base-form>
             </div>
         </div>
     </div>

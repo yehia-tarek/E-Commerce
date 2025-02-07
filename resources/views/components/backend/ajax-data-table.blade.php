@@ -12,6 +12,7 @@
     'hover' => true,
     'class' => '',
     'createRoute' => null,
+    'createPermission' => null,
     'order' => [[0, 'desc']],
 ])
 
@@ -146,15 +147,16 @@
                 },
                 dom: '<"d-flex justify-content-between align-items-center mb-4"<"d-flex gap-3"B><"d-flex gap-3"f>>rt<"d-flex justify-content-between align-items-center mt-4"<"d-flex gap-3"li>p>',
                 buttons: [
-                    @if ($createRoute)
-                        {
-                            text: '<i class="fas fa-plus"></i> New',
-                            className: 'btn btn-primary',
-                            action: function() {
-                                window.location.href = '{{ $createRoute }}';
-                            }
-                        },
-                    @endif {
+                    @if ($createRoute && auth()->user()->can($createPermission))
+                    {
+                        text: '<i class="fas fa-plus"></i> New',
+                        className: 'btn btn-primary',
+                        action: function() {
+                            window.location.href = '{{ $createRoute }}';
+                        }
+                    },
+                    @endif
+                    {
                         extend: 'excel',
                         text: '<i class="fas fa-file-excel"></i> Excel',
                         className: 'btn btn-success',

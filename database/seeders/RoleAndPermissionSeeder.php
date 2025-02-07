@@ -54,7 +54,14 @@ class RoleAndPermissionSeeder extends Seeder
                 'user-edit',
                 'user-delete',
             ],
+            'category' => [
+                'category-list',
+                'category-create',
+                'category-edit',
+                'category-delete',
+            ],
         ];
+
         foreach ($permissions as $group => $groupPermissions) {
             foreach ($groupPermissions as $permission) {
                 Permission::create(['guard_name' => 'admin', 'name' => $permission, 'group_name' => $group]);

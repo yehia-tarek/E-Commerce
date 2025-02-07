@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\CustomersController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\CategoriesController;
 use App\Http\Controllers\Backend\Auth\AdminAuthController;
 
 Route::middleware('guest:admin')->group(function () {
@@ -25,4 +26,5 @@ Route::middleware('admin')->group(function () {
     Route::resource('admins', AdminController::class);
     Route::resource('roles', RoleController::class);
     Route::resource('customers', CustomersController::class);
+    Route::resource('categories', CategoriesController::class);
 });

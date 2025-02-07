@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('description')->nullable();
-            $table->foreignId('parent_id')->nullable()->constrained('categories');
+            $table->nestedSet(); // make parent_id , _lft , _rgt columns
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

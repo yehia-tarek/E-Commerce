@@ -24,7 +24,13 @@ return [
             'name' => 'Customers',
             'route' => 'customers.index',
             'icon' => 'fas fa-users',
-            'permission' => 'customer-list',
+            'permission' => 'user-list',
+        ],
+        [
+            'name' => 'Categories',
+            'route' => 'categories.index',
+            'icon' => 'fas fa-list',
+            'permission' => 'category-list',
         ],
     ],
 ];
